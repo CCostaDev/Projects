@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown to You</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        background-color: #f8e8e8;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #countdown {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      #message {
+        font-size: 1.5rem;
+        color: #d6336c;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="countdown"></div>
+    <div id="message"></div>
+
+    <script>
+      const targetDate = new Date("2025-03-24T00:00:00").getTime();
+      const messages = [
+        "till I get to see your pretty face",
+        "till I kiss you",
+        "till I hold you in my arms",
+        "till we laugh together again",
+        "till I finally hold your hand",
+        "till I see your beautiful smile in person",
+        "till I get lost in your eyes",
+        "till our first date together",
+        "till I feel your warmth next to me",
+        "till I make you laugh in person",
+        "till I hear your voice without a screen between us",
+        "till our first real hug as a couple",
+        "till we create our first memory together as more than friends",
+        "till I get to call you mine while looking into your eyes",
+        "till our fingers intertwine for the first time",
+        "till I kiss you for the first time",
+        "till I can finally whisper 'I love you' in your ear",
+        "till I watch you blush in real life",
+        "till we walk side by side, together at last",
+        "till I take candid photos of you just because I can",
+        "till we sit together, no distance, no calls, just us",
+        "till I get to surprise you in person",
+        "till I feel the happiness of seeing you right in front of me",
+        "till our story truly begins, together",
+      ];
+      let messageIndex = 0;
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = targetDate - now;
+        if (timeLeft <= 0) {
+          document.getElementById("countdown").innerText = "The wait is over!";
+          document.getElementById("message").innerText = "You're finally here!";
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById(
+          "countdown"
+        ).innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+
+      function updateMessage() {
+        document.getElementById("message").innerText = messages[messageIndex];
+        messageIndex = (messageIndex + 1) % messages.length;
+      }
+
+      setInterval(updateCountdown, 1000);
+      setInterval(updateMessage, 3000);
+
+      updateCountdown();
+      updateMessage();
+    </script>
+  </body>
+</html>
