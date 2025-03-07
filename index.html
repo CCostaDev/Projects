@@ -33,6 +33,29 @@
 
     <script>
       const targetDate = new Date("2025-03-24T10:00:00").getTime();
+
+      const prankMessages = [
+        "Checking again? That's the 3rd time today! 😏",
+        "You must really miss me. 😆",
+        "Caught you sneaking a peek! 👀",
+        "Oh, it's YOU again! Checking for surprises? 😏",
+        "You're not supposed to check this often, you know. 😜",
+        "Guess what? The countdown hasn't changed! 😂",
+        "You again? I bet you're smiling right now. 😘",
+        "Wow, someone is impatient! 🥰",
+        "Just a little longer! You got this. 💕",
+        "Haha, checking early won't make time go faster! 😆",
+        "Bet you just smiled reading this. 😏",
+        "If staring at the countdown made time move faster, we'd be together already! 😜",
+        "Wait... weren't you JUST here? 🤨",
+        "Wow, you check this way too often! 😆",
+        "Oops, I just reset the countdown! Just kidding. 😏",
+        "Checking again? That's cheating! 😂",
+        "You must really be counting the seconds! ⏳",
+        "Are you that excited, or just impatient? 😘",
+        "Fun fact: Checking more often won't make time go faster! 🤓",
+        "Caught you! Now you owe me an extra hug. 🥰",
+      ];
       const messages = [
         "till I get to see your pretty face",
         "till I kiss you",
@@ -91,16 +114,34 @@
         ).innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
       }
 
+      function showPrankMessage() {
+        const shouldPrank = Math.random() < 0.5; // 50% chance
+
+        if (shouldPrank) {
+          // 50% chance to show prank message
+          const prankMessage =
+            prankMessages[Math.floor(Math.random() * prankMessages.length)];
+          document.getElementById("message").innerText = prankMessage;
+
+          //after 5 seconds, return to normal rotating messages
+          setTimeout(() => {
+            updateMessage();
+            setInterval(updateMessage, 3000); //Resume normal message rotation
+          }, 5000);
+        } else {
+          setInterval(updateMessage, 3000);
+          updateMessage();
+        }
+      }
+
       function updateMessage() {
         document.getElementById("message").innerText = messages[messageIndex];
         messageIndex = (messageIndex + 1) % messages.length;
       }
 
       setInterval(updateCountdown, 1000);
-      setInterval(updateMessage, 3000);
-
+      showPrankMessage();
       updateCountdown();
-      updateMessage();
     </script>
   </body>
 </html>
